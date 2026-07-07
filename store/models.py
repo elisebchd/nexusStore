@@ -106,6 +106,14 @@ class Product(models.Model):
         return None
 
     @property
+    def has_real_photo(self):
+        """True if the primary image is an actual photo (not an SVG placeholder)."""
+        img = self.primary_image
+        if not img or not img.image or not img.image.name:
+            return False
+        return not img.image.name.lower().endswith('.svg')
+
+    @property
     def in_stock(self):
         return self.stock > 0
 

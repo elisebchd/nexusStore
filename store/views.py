@@ -9,13 +9,28 @@ from .models import Product, Category, Cart, CartItem, Wishlist, Order, OrderIte
 from .forms import ReviewForm, CheckoutForm, ProductSearchForm
 
 
+def _prefer_real_photos(queryset, limit):
+    """Return up to `limit` items from queryset, ordering products that have
+    a real photo (not an SVG placeholder) before ones that don't."""
+    items = list(queryset)
+    items.sort(key=lambda p: not p.has_real_photo)
+    return items[:limit]
+
+
 def home(request):
-    featured = Product.objects.filter(is_active=True, is_featured=True).prefetch_related('images')[:8]
-    deals = Product.objects.filter(is_active=True, is_deal_of_day=True).prefetch_related('images')[:4]
+    featured_qs = Product.objects.filter(is_active=True, is_featured=True).prefetch_related('images')
+    deals_qs = Product.objects.filter(is_active=True, is_deal_of_day=True).prefetch_related('images')
+    phones_qs = Product.objects.filter(is_active=True, category__slug='smartphones').prefetch_related('images')
+    laptops_qs = Product.objects.filter(is_active=True, category__slug='laptops').prefetch_related('images')
+    cameras_qs = Product.objects.filter(is_active=True, category__slug='cameras').prefetch_related('images')
+
+    featured = _prefer_real_photos(featured_qs, 8)
+    deals = _prefer_real_photos(deals_qs, 4)
+    phones = _prefer_real_photos(phones_qs, 6)
+    laptops = _prefer_real_photos(laptops_qs, 6)
+    cameras = _prefer_real_photos(cameras_qs, 6)
+
     categories = Category.objects.filter(is_active=True)
-    phones = Product.objects.filter(is_active=True, category__slug='smartphones').prefetch_related('images')[:6]
-    laptops = Product.objects.filter(is_active=True, category__slug='laptops').prefetch_related('images')[:6]
-    cameras = Product.objects.filter(is_active=True, category__slug='cameras').prefetch_related('images')[:6]
     return render(request, 'store/home.html', {
         'featured_products': featured,
         'deal_products': deals,
