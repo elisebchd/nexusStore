@@ -153,7 +153,7 @@ class ProductImage(models.Model):
         ordering = ['order', 'id']
 
     def __str__(self):
-        return f"{self.product.name} — Image {self.id}"
+        return f"{self.product.name} - Image {self.id}"
 
     @property
     def has_image(self):
@@ -161,7 +161,7 @@ class ProductImage(models.Model):
 
     @property
     def safe_url(self):
-        """Return URL or empty string — never raises."""
+        """Return URL or empty string - never raises."""
         try:
             if self.image and self.image.name:
                 return self.image.url
@@ -187,7 +187,7 @@ class Review(models.Model):
         unique_together = ['product', 'user']
 
     def __str__(self):
-        return f"{self.user.username} — {self.product.name} ({self.rating}★)"
+        return f"{self.user.username} - {self.product.name} ({self.rating}★)"
 
 
 class Cart(models.Model):

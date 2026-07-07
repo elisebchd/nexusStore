@@ -21,7 +21,7 @@ class ProductImageInline(admin.TabularInline):
                 )
             except Exception:
                 pass
-        return '—'
+        return '-'
     preview.short_description = 'Preview'
 
 
@@ -34,7 +34,7 @@ class OrderItemInline(admin.TabularInline):
     def line_total(self, obj):
         if obj.pk:
             return f'${obj.total_price:.2f}'
-        return '—'
+        return '-'
     line_total.short_description = 'Total'
 
 
@@ -169,7 +169,7 @@ class CartAdmin(admin.ModelAdmin):
     total_items.short_description = 'Items'
 
 
-admin.site.site_header = 'NEXUS Store — Admin'
+admin.site.site_header = 'NEXUS Store - Admin'
 admin.site.site_title = 'NEXUS Admin'
 admin.site.index_title = 'Store Management'
 
@@ -180,7 +180,7 @@ from django.utils.text import slugify as _slugify
 
 
 class AutoSlugForm(_forms.ModelForm):
-    """Make slug optional in admin — auto-generates from name on save."""
+    """Make slug optional in admin - auto-generates from name on save."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

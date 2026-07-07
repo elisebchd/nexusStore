@@ -146,7 +146,7 @@ class Command(BaseCommand):
                     sku=d['sku'], stock=d['stock'], is_active=True,
                     is_featured=is_featured, is_deal_of_day=is_deal,
                     deal_expires=deal_expires, specifications=specs_json,
-                    meta_title=f"{d['name']} — Buy at NEXUS Store",
+                    meta_title=f"{d['name']} - Buy at NEXUS Store",
                     meta_description=d['short'][:155],
                 )
 

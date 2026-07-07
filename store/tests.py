@@ -1,5 +1,5 @@
 """
-NEXUS Store — Comprehensive Test Suite  (107 tests, all green)
+NEXUS Store - Comprehensive Test Suite  (107 tests, all green)
 Run: python manage.py test
 """
 from decimal import Decimal
@@ -49,7 +49,7 @@ class BaseTestCase(TestCase):
             price=Decimal('999.00'), compare_price=Decimal('1099.00'),
             sku='APL-IP16PRO', stock=50, is_active=True, is_featured=True,
         )
-        # No image file — primary_image returns None, templates must handle this
+        # No image file - primary_image returns None, templates must handle this
         ProductImage.objects.create(product=self.product, is_primary=True, order=0, alt_text='front')
 
         self.deal_product = Product.objects.create(
@@ -740,7 +740,7 @@ class CartMergeTest(BaseTestCase):
         self.client.post(f'/cart/add/{self.product.id}/', {'quantity': 2})
         session_key = self.client.session.session_key
         self.assertEqual(Cart.objects.get(session_key=session_key).items.first().quantity, 2)
-        # Login and add another item — merge happens
+        # Login and add another item - merge happens
         self.client.login(username='testuser', password='testpass123')
         self.client.post(f'/cart/add/{self.deal_product.id}/', {'quantity': 1})
         user_cart = Cart.objects.get(user=self.user)

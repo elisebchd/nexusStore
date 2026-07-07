@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ post.title }} — NEXUS Academy{% endblock %}
+{% block title %}{{ post.title }} - NEXUS Academy{% endblock %}
 {% block meta_description %}{{ post.meta_description|default:post.excerpt }}{% endblock %}
 {% block content %}
 <div class="page-breadcrumb"><div class="container-xl"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="{% url 'store:home' %}">Home</a></li><li class="breadcrumb-item"><a href="{% url 'blog:academy_home' %}">Academy</a></li><li class="breadcrumb-item active">{{ post.title|truncatechars:40 }}</li></ol></div></div>

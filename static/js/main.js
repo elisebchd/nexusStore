@@ -1,4 +1,4 @@
-// NEXUS Store — Main JS
+// NEXUS Store - Main JS
 
 document.addEventListener('DOMContentLoaded', function() {
 
