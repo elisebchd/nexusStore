@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="{% block meta_description %}NEXUS - Premium tech products: smartphones, laptops, cameras. Best prices, fast shipping.{% endblock %}" />
   <title>{% block title %}NEXUS - Premium Tech Store{% endblock %}</title>
-  {% load static %}
+  {% load static icons %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="{% static 'css/main.css' %}" />
   {% block extra_css %}{% endblock %}
 </head>
@@ -19,9 +18,9 @@
 <div class="topbar">
   <div class="container-xl">
     <div class="d-flex justify-content-between align-items-center py-1">
-      <span class="topbar-text"><i class="bi bi-truck me-1"></i>Free shipping on orders over $99</span>
+      <span class="topbar-text">{% icon "truck" cls="me-1" %}Free shipping on orders over $99</span>
       <div class="d-flex gap-3 align-items-center">
-        <a href="{% url 'blog:academy_home' %}" class="topbar-link"><i class="bi bi-mortarboard me-1"></i>Academy</a>
+        <a href="{% url 'blog:academy_home' %}" class="topbar-link">{% icon "mortarboard" cls="me-1" %}Academy</a>
         {% if user.is_authenticated %}
           <a href="{% url 'accounts:profile' %}" class="topbar-link">{{ user.first_name|default:user.username }}</a>
           <a href="{% url 'logout' %}" class="topbar-link">Sign out</a>
@@ -53,7 +52,7 @@
               {% endfor %}
             </select>
             <input type="text" name="q" class="search-input" placeholder="Search products, brands, models..." value="{{ request.GET.q }}" />
-            <button type="submit" class="search-btn"><i class="bi bi-search"></i></button>
+            <button type="submit" class="search-btn">{% icon "search" %}</button>
           </div>
         </form>
       </div>
@@ -62,21 +61,21 @@
       <div class="header-actions d-flex align-items-center gap-2 ms-auto">
         {% if user.is_authenticated %}
         <a href="{% url 'accounts:profile' %}" class="header-action-btn" title="Profile">
-          <i class="bi bi-person-circle"></i>
+          {% icon "person-circle" %}
           <span class="d-none d-xl-inline">Account</span>
         </a>
         <a href="{% url 'store:wishlist' %}" class="header-action-btn" title="Wishlist">
-          <i class="bi bi-heart"></i>
+          {% icon "heart" %}
           <span class="d-none d-xl-inline">Wishlist</span>
         </a>
         {% else %}
         <a href="{% url 'login' %}" class="header-action-btn" title="Sign in">
-          <i class="bi bi-person"></i>
+          {% icon "person" %}
           <span class="d-none d-xl-inline">Sign In</span>
         </a>
         {% endif %}
         <a href="{% url 'store:cart' %}" class="header-action-btn cart-btn" title="Cart">
-          <i class="bi bi-bag"></i>
+          {% icon "bag" %}
           <span class="d-none d-xl-inline">Cart</span>
           {% if cart_count > 0 %}
           <span class="cart-badge">{{ cart_count }}</span>
@@ -85,7 +84,7 @@
       </div>
 
       <button class="navbar-toggler ms-2 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <i class="bi bi-list fs-4 text-white"></i>
+        {% icon "list" cls="fs-4 text-white" %}
       </button>
     </nav>
 
@@ -94,7 +93,7 @@
       <form action="{% url 'store:product_list' %}" method="GET">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search..." />
-          <button class="btn btn-warning" type="submit"><i class="bi bi-search"></i></button>
+          <button class="btn btn-warning" type="submit">{% icon "search" %}</button>
         </div>
       </form>
     </div>
@@ -105,12 +104,12 @@
     <div class="container-xl">
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="cat-nav-list">
-          <li><a href="{% url 'store:product_list' %}"><i class="bi bi-grid me-1"></i>All Products</a></li>
+          <li><a href="{% url 'store:product_list' %}">{% icon "grid" cls="me-1" %}All Products</a></li>
           {% for cat in nav_categories %}
           <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
           {% endfor %}
           <li><a href="{% url 'store:product_list' %}?sort=newest">New Arrivals</a></li>
-          <li><a href="{% url 'store:product_list' %}?deal=1" class="deal-link"><i class="bi bi-lightning-fill me-1"></i>Deals</a></li>
+          <li><a href="{% url 'store:product_list' %}?deal=1" class="deal-link">{% icon "lightning-fill" cls="me-1" %}Deals</a></li>
         </ul>
       </div>
     </div>
@@ -152,10 +151,10 @@
           <a class="nexus-logo-footer" href="{% url 'store:home' %}"><span class="logo-n">N</span>EXUS</a>
           <p class="footer-desc mt-3">Your premium destination for the latest tech. Smartphones, laptops, cameras - curated, tested, delivered fast.</p>
           <div class="social-links mt-3">
-            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
-            <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+            <a href="#" class="social-link">{% icon "twitter-x" %}</a>
+            <a href="#" class="social-link">{% icon "instagram" %}</a>
+            <a href="#" class="social-link">{% icon "youtube" %}</a>
+            <a href="#" class="social-link">{% icon "tiktok" %}</a>
           </div>
         </div>
         <div class="col-6 col-lg-2">

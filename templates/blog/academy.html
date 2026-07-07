@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load icons %}
 {% block title %}NEXUS Academy - Tech Guides, Reviews & News{% endblock %}
 {% block content %}
 <div class="academy-hero">
@@ -47,9 +48,9 @@
           <a href="{{ post.get_absolute_url }}" style="color:inherit;text-decoration:none"><h3 class="post-card-title">{{ post.title }}</h3></a>
           <p class="post-card-excerpt">{{ post.excerpt|truncatechars:100 }}</p>
           <div class="post-card-meta">
-            <span><i class="bi bi-person me-1"></i>{{ post.author.get_full_name|default:post.author.username }}</span>
-            <span><i class="bi bi-clock me-1"></i>{{ post.read_time }} min</span>
-            <span><i class="bi bi-eye me-1"></i>{{ post.views }}</span>
+            <span>{% icon "person" cls="me-1" %}{{ post.author.get_full_name|default:post.author.username }}</span>
+            <span>{% icon "clock" cls="me-1" %}{{ post.read_time }} min</span>
+            <span>{% icon "eye" cls="me-1" %}{{ post.views }}</span>
           </div>
         </div>
       </div>

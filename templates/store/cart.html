@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static store_tags %}
+{% load static store_tags icons %}
 {% block title %}Shopping Cart - NEXUS{% endblock %}
 {% block content %}
 <div class="page-breadcrumb"><div class="container-xl"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="{% url 'store:home' %}">Home</a></li><li class="breadcrumb-item active">Cart</li></ol></div></div>
@@ -39,7 +39,7 @@
           <form method="POST" action="{% url 'store:remove_from_cart' item.id %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-sm btn-link text-danger p-0" onclick="return confirm('Remove this item?')">
-              <i class="bi bi-trash me-1"></i>Remove
+              {% icon "trash" cls="me-1" %}Remove
             </button>
           </form>
         </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="summary-row summary-total"><span>Total</span><span>${{ cart.total }}</span></div>
         <a href="{% url 'store:checkout' %}" class="btn-primary-custom w-100 mt-3" style="justify-content:center;padding:14px">
-          <i class="bi bi-credit-card me-2"></i>Proceed to Checkout
+          {% icon "credit-card" cls="me-2" %}Proceed to Checkout
         </a>
         <a href="{% url 'store:product_list' %}" class="btn-outline-custom w-100 mt-2" style="justify-content:center">Continue Shopping</a>
         <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">

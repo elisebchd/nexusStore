@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static store_tags %}
+{% load static store_tags icons %}
 {% block title %}{{ product.name }} - NEXUS{% endblock %}
 {% block meta_description %}{{ product.meta_description|default:product.short_description }}{% endblock %}
 {% block content %}
@@ -42,7 +42,7 @@
       {% if product.review_count > 0 %}
       <div class="d-flex align-items-center gap-2 mb-3">
         <span class="stars">
-          {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}
+          {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}{% icon "star-fill" %}{% else %}{% icon "star" %}{% endif %}{% endfor %}
         </span>
         <span style="font-size:14px;font-weight:600">{{ product.avg_rating }}</span>
         <span class="text-muted" style="font-size:13px">({{ product.review_count }} reviews)</span>
@@ -56,7 +56,7 @@
         <span class="product-discount-badge">-{{ product.discount_percentage }}%</span>
         {% endif %}
       </div>
-      {% if product.savings %}<div class="product-price-save mb-3"><i class="bi bi-tag-fill me-1"></i>You save ${{ product.savings|floatformat:2 }}</div>{% endif %}
+      {% if product.savings %}<div class="product-price-save mb-3">{% icon "tag-fill" cls="me-1" %}You save ${{ product.savings|floatformat:2 }}</div>{% endif %}
 
       <div class="mb-3">
         {% if product.in_stock %}
@@ -78,7 +78,7 @@
             <button type="button" class="qty-btn" data-action="inc">+</button>
           </div>
           <button type="submit" class="btn-primary-custom flex-grow-1" style="justify-content:center;padding:14px">
-            <i class="bi bi-bag-plus-fill me-2"></i>Add to Cart
+            {% icon "bag-plus-fill" cls="me-2" %}Add to Cart
           </button>
         </div>
       </form>
@@ -88,22 +88,22 @@
         {% if user.is_authenticated %}
         <button class="btn-outline-custom ajax-wishlist {% if in_wishlist %}wishlist-btn-active{% endif %}"
                 data-product-id="{{ product.id }}" style="flex:1;justify-content:center">
-          <i class="bi bi-heart{% if in_wishlist %}-fill{% endif %} me-1"></i>
+          {% if in_wishlist %}{% icon "heart-fill" cls="me-1" %}{% else %}{% icon "heart" cls="me-1" %}{% endif %}
           {% if in_wishlist %}Saved{% else %}Save to Wishlist{% endif %}
         </button>
         {% else %}
         <a href="{% url 'login' %}?next={{ request.path }}" class="btn-outline-custom" style="flex:1;justify-content:center">
-          <i class="bi bi-heart me-1"></i>Add to Wishlist
+          {% icon "heart" cls="me-1" %}Add to Wishlist
         </a>
         {% endif %}
       </div>
 
       <div class="rounded-2 p-3 mb-3" style="background:var(--surface-2);font-size:13px">
         <div class="row g-2">
-          <div class="col-6 d-flex align-items-center gap-2"><i class="bi bi-truck text-primary-custom"></i> Free delivery over $99</div>
-          <div class="col-6 d-flex align-items-center gap-2"><i class="bi bi-arrow-return-left text-primary-custom"></i> 30-day returns</div>
-          <div class="col-6 d-flex align-items-center gap-2"><i class="bi bi-shield-check text-primary-custom"></i> 2-year warranty</div>
-          <div class="col-6 d-flex align-items-center gap-2"><i class="bi bi-lock text-primary-custom"></i> Secure checkout</div>
+          <div class="col-6 d-flex align-items-center gap-2">{% icon "truck" cls="text-primary-custom" %} Free delivery over $99</div>
+          <div class="col-6 d-flex align-items-center gap-2">{% icon "arrow-return-left" cls="text-primary-custom" %} 30-day returns</div>
+          <div class="col-6 d-flex align-items-center gap-2">{% icon "shield-check" cls="text-primary-custom" %} 2-year warranty</div>
+          <div class="col-6 d-flex align-items-center gap-2">{% icon "lock" cls="text-primary-custom" %} Secure checkout</div>
         </div>
       </div>
       {% if product.sku %}<p class="text-muted mb-0" style="font-size:12px">SKU: {{ product.sku }}</p>{% endif %}
@@ -139,7 +139,7 @@
           <div class="col-md-3 text-center">
             <div style="font-size:3rem;font-weight:800;font-family:'Space Grotesk',sans-serif">{{ product.avg_rating }}</div>
             <div class="stars mb-1">
-              {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}
+              {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}{% icon "star-fill" %}{% else %}{% icon "star" %}{% endif %}{% endfor %}
             </div>
             <div class="text-muted small">{{ product.review_count }} review{{ product.review_count|pluralize }}</div>
           </div>
@@ -166,8 +166,8 @@
                 <span class="text-muted small">{{ review.created_at|date:"M d, Y" }}</span>
               </div>
               <div class="stars" style="font-size:13px">
-                {% for i in "12345" %}{% if forloop.counter <= review.rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}
-                {% if review.is_verified_purchase %}<span class="ms-2 text-success" style="font-size:11px;font-weight:600"><i class="bi bi-check-circle-fill me-1"></i>Verified Purchase</span>{% endif %}
+                {% for i in "12345" %}{% if forloop.counter <= review.rating %}{% icon "star-fill" %}{% else %}{% icon "star" %}{% endif %}{% endfor %}
+                {% if review.is_verified_purchase %}<span class="ms-2 text-success" style="font-size:11px;font-weight:600">{% icon "check-circle-fill" cls="me-1" %}Verified Purchase</span>{% endif %}
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@
               <label class="form-label fw-semibold small">Review</label>
               <textarea name="comment" class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
             </div>
-            <button type="submit" class="btn-primary-custom"><i class="bi bi-send me-1"></i>Submit Review</button>
+            <button type="submit" class="btn-primary-custom">{% icon "send" cls="me-1" %}Submit Review</button>
           </form>
         </div>
         {% elif not user.is_authenticated %}

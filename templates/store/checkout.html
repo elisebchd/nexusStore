@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static store_tags %}
+{% load static store_tags icons %}
 {% block title %}Checkout - NEXUS{% endblock %}
 {% block content %}
 <div class="page-breadcrumb"><div class="container-xl"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="{% url 'store:home' %}">Home</a></li><li class="breadcrumb-item"><a href="{% url 'store:cart' %}">Cart</a></li><li class="breadcrumb-item active">Checkout</li></ol></div></div>
@@ -10,7 +10,7 @@
     <div class="row g-4">
       <div class="col-lg-8">
         <div class="checkout-card">
-          <h5><i class="bi bi-person-fill me-2 text-primary-custom"></i>Contact Information</h5>
+          <h5>{% icon "person-fill" cls="me-2 text-primary-custom" %}Contact Information</h5>
           <div class="row g-3">
             <div class="col-md-6"><label class="form-label fw-semibold small">Full Name *</label>{{ form.full_name }}{% if form.full_name.errors %}<div class="text-danger small">{{ form.full_name.errors.0 }}</div>{% endif %}</div>
             <div class="col-md-6"><label class="form-label fw-semibold small">Email *</label>{{ form.email }}{% if form.email.errors %}<div class="text-danger small">{{ form.email.errors.0 }}</div>{% endif %}</div>
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="checkout-card">
-          <h5><i class="bi bi-geo-alt-fill me-2 text-primary-custom"></i>Shipping Address</h5>
+          <h5>{% icon "geo-alt-fill" cls="me-2 text-primary-custom" %}Shipping Address</h5>
           <div class="row g-3">
             <div class="col-12"><label class="form-label fw-semibold small">Address Line 1 *</label>{{ form.address_line1 }}</div>
             <div class="col-12"><label class="form-label fw-semibold small">Address Line 2</label>{{ form.address_line2 }}</div>
@@ -29,13 +29,13 @@
           </div>
         </div>
         <div class="checkout-card">
-          <h5><i class="bi bi-chat-text-fill me-2 text-primary-custom"></i>Order Notes</h5>
+          <h5>{% icon "chat-text-fill" cls="me-2 text-primary-custom" %}Order Notes</h5>
           {{ form.notes }}
         </div>
         <div class="checkout-card">
-          <h5><i class="bi bi-credit-card-fill me-2 text-primary-custom"></i>Payment</h5>
+          <h5>{% icon "credit-card-fill" cls="me-2 text-primary-custom" %}Payment</h5>
           <div class="p-3 rounded text-center" style="background:var(--surface-2);border:1.5px dashed var(--border)">
-            <i class="bi bi-lock-fill me-1 text-success"></i>
+            {% icon "lock-fill" cls="me-1 text-success" %}
             <span class="text-muted small">Secure demo checkout - integrate Stripe or PayPal for production.</span>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="summary-row"><span>Shipping</span><span>{% if cart.subtotal >= 99 %}<span class="text-success fw-semibold">Free</span>{% else %}$9.99{% endif %}</span></div>
           <div class="summary-row summary-total"><span>Total</span><span>${{ cart.total }}</span></div>
           <button type="submit" class="btn-primary-custom w-100 mt-3" style="justify-content:center;padding:14px;font-size:15px">
-            <i class="bi bi-lock-fill me-2"></i>Place Order
+            {% icon "lock-fill" cls="me-2" %}Place Order
           </button>
         </div>
       </div>

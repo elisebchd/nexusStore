@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static store_tags %}
+{% load static store_tags icons %}
 {% block title %}NEXUS - Premium Tech: Smartphones, Laptops, Cameras{% endblock %}
 {% block content %}
 
@@ -12,8 +12,8 @@
         <h1 class="hero-title">The Future of<br><span>Tech</span> Is Here</h1>
         <p class="hero-subtitle">Curated smartphones, laptops and cameras - expert-picked, fast-shipped.</p>
         <div class="d-flex flex-wrap gap-3">
-          <a href="{% url 'store:product_list' %}" class="btn-hero-primary"><i class="bi bi-bag-fill"></i> Shop Now</a>
-          <a href="{% url 'blog:academy_home' %}" class="btn-hero-secondary"><i class="bi bi-mortarboard"></i> Academy</a>
+          <a href="{% url 'store:product_list' %}" class="btn-hero-primary">{% icon "bag-fill" %} Shop Now</a>
+          <a href="{% url 'blog:academy_home' %}" class="btn-hero-secondary">{% icon "mortarboard" %} Academy</a>
         </div>
         <div class="d-flex gap-4 mt-4">
           <div><div style="font-size:1.4rem;font-weight:800;color:#fff">30+</div><div style="font-size:12px;color:rgba(255,255,255,.5)">Products</div></div>
@@ -44,10 +44,10 @@
 <div class="trust-row">
   <div class="container-xl">
     <div class="row g-3 text-center text-md-start">
-      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start"><i class="bi bi-truck"></i><div><div style="color:#fff;font-weight:700;font-size:13px">Free Shipping</div><div style="font-size:11px">Orders over $99</div></div></div></div>
-      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start"><i class="bi bi-shield-check"></i><div><div style="color:#fff;font-weight:700;font-size:13px">2-Year Warranty</div><div style="font-size:11px">Full coverage</div></div></div></div>
-      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start"><i class="bi bi-arrow-return-left"></i><div><div style="color:#fff;font-weight:700;font-size:13px">30-Day Returns</div><div style="font-size:11px">Hassle-free</div></div></div></div>
-      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start"><i class="bi bi-headset"></i><div><div style="color:#fff;font-weight:700;font-size:13px">24/7 Support</div><div style="font-size:11px">Expert help</div></div></div></div>
+      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start">{% icon "truck" %}<div><div style="color:#fff;font-weight:700;font-size:13px">Free Shipping</div><div style="font-size:11px">Orders over $99</div></div></div></div>
+      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start">{% icon "shield-check" %}<div><div style="color:#fff;font-weight:700;font-size:13px">2-Year Warranty</div><div style="font-size:11px">Full coverage</div></div></div></div>
+      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start">{% icon "arrow-return-left" %}<div><div style="color:#fff;font-weight:700;font-size:13px">30-Day Returns</div><div style="font-size:11px">Hassle-free</div></div></div></div>
+      <div class="col-6 col-md-3"><div class="trust-item justify-content-center justify-content-md-start">{% icon "headset" %}<div><div style="color:#fff;font-weight:700;font-size:13px">24/7 Support</div><div style="font-size:11px">Expert help</div></div></div></div>
     </div>
   </div>
 </div>
@@ -80,8 +80,8 @@
 <section class="section-bg-white">
   <div class="container-xl">
     <div class="section-heading">
-      <h2 class="section-title"><i class="bi bi-lightning-fill text-danger me-2"></i>Deals of the <span>Day</span></h2>
-      <a href="{% url 'store:product_list' %}" class="section-link">All deals <i class="bi bi-arrow-right"></i></a>
+      <h2 class="section-title">{% icon "lightning-fill" cls="text-danger me-2" %}Deals of the <span>Day</span></h2>
+      <a href="{% url 'store:product_list' %}" class="section-link">All deals {% icon "arrow-right" %}</a>
     </div>
     <div class="row g-3">
       {% for product in deal_products %}
@@ -109,7 +109,7 @@
           {% endif %}
           <form method="POST" action="{% url 'store:add_to_cart' product.id %}" class="mt-2">
             {% csrf_token %}
-            <button type="submit" class="btn-primary-custom w-100" style="justify-content:center"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+            <button type="submit" class="btn-primary-custom w-100" style="justify-content:center">{% icon "bag-plus" cls="me-1" %}Add to Cart</button>
           </form>
         </div>
       </div>
@@ -125,7 +125,7 @@
   <div class="container-xl">
     <div class="section-heading">
       <h2 class="section-title">Featured <span>Products</span></h2>
-      <a href="{% url 'store:product_list' %}" class="section-link">View all <i class="bi bi-arrow-right"></i></a>
+      <a href="{% url 'store:product_list' %}" class="section-link">View all {% icon "arrow-right" %}</a>
     </div>
     <div class="row g-3">
       {% for product in featured_products %}
@@ -146,7 +146,7 @@
           <div>
             <div style="color:rgba(255,255,255,.6);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px">Latest Releases</div>
             <div style="color:#fff;font-size:1.2rem;font-weight:800;margin:4px 0">New Smartphones</div>
-            <a href="{% url 'store:category_detail' 'smartphones' %}" class="btn-hero-secondary" style="padding:8px 18px;font-size:13px;margin-top:8px;display:inline-flex">Shop Now <i class="bi bi-arrow-right ms-1"></i></a>
+            <a href="{% url 'store:category_detail' 'smartphones' %}" class="btn-hero-secondary" style="padding:8px 18px;font-size:13px;margin-top:8px;display:inline-flex">Shop Now {% icon "arrow-right" cls="ms-1" %}</a>
           </div>
         </div>
       </div>
@@ -156,7 +156,7 @@
           <div>
             <div style="color:rgba(255,255,255,.6);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px">Top Performers</div>
             <div style="color:#fff;font-size:1.2rem;font-weight:800;margin:4px 0">Pro Laptops</div>
-            <a href="{% url 'store:category_detail' 'laptops' %}" class="btn-hero-primary" style="padding:8px 18px;font-size:13px;margin-top:8px;display:inline-flex">Shop Now <i class="bi bi-arrow-right ms-1"></i></a>
+            <a href="{% url 'store:category_detail' 'laptops' %}" class="btn-hero-primary" style="padding:8px 18px;font-size:13px;margin-top:8px;display:inline-flex">Shop Now {% icon "arrow-right" cls="ms-1" %}</a>
           </div>
         </div>
       </div>
@@ -170,7 +170,7 @@
   <div class="container-xl">
     <div class="section-heading">
       <h2 class="section-title">&#128241; Latest <span>Smartphones</span></h2>
-      <a href="{% url 'store:category_detail' 'smartphones' %}" class="section-link">See all <i class="bi bi-arrow-right"></i></a>
+      <a href="{% url 'store:category_detail' 'smartphones' %}" class="section-link">See all {% icon "arrow-right" %}</a>
     </div>
     <div class="row g-3">
       {% for product in phones %}<div class="col-6 col-md-4 col-lg-2">{% include 'store/includes/product_card.html' %}</div>{% endfor %}
@@ -185,7 +185,7 @@
   <div class="container-xl">
     <div class="section-heading">
       <h2 class="section-title">&#128187; Top <span>Laptops</span></h2>
-      <a href="{% url 'store:category_detail' 'laptops' %}" class="section-link">See all <i class="bi bi-arrow-right"></i></a>
+      <a href="{% url 'store:category_detail' 'laptops' %}" class="section-link">See all {% icon "arrow-right" %}</a>
     </div>
     <div class="row g-3">
       {% for product in laptops %}<div class="col-6 col-md-4 col-lg-2">{% include 'store/includes/product_card.html' %}</div>{% endfor %}
@@ -200,7 +200,7 @@
   <div class="container-xl">
     <div class="section-heading">
       <h2 class="section-title">&#128247; Top <span>Cameras</span></h2>
-      <a href="{% url 'store:category_detail' 'cameras' %}" class="section-link">See all <i class="bi bi-arrow-right"></i></a>
+      <a href="{% url 'store:category_detail' 'cameras' %}" class="section-link">See all {% icon "arrow-right" %}</a>
     </div>
     <div class="row g-3">
       {% for product in cameras %}<div class="col-6 col-md-4 col-lg-2">{% include 'store/includes/product_card.html' %}</div>{% endfor %}
@@ -217,7 +217,7 @@
       <p style="color:rgba(255,255,255,.6);margin-bottom:24px">Exclusive deals, tech reviews, early access to new arrivals.</p>
       <form class="d-flex justify-content-center gap-2 flex-wrap" onsubmit="return false;">
         <input type="email" class="form-control" style="max-width:320px" placeholder="Enter your email" />
-        <button class="btn-hero-primary" style="padding:10px 24px">Subscribe <i class="bi bi-arrow-right"></i></button>
+        <button class="btn-hero-primary" style="padding:10px 24px">Subscribe {% icon "arrow-right" %}</button>
       </form>
       <p style="color:rgba(255,255,255,.4);font-size:12px;margin-top:12px">No spam. Unsubscribe anytime.</p>
     </div>

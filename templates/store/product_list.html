@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load icons %}
 {% load static %}
 {% block title %}All Products - NEXUS Store{% endblock %}
 {% block content %}
@@ -23,7 +24,7 @@
           <h6>Search</h6>
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ request.GET.q }}">
-            <button class="btn" style="background:var(--primary);color:#fff" type="submit"><i class="bi bi-search"></i></button>
+            <button class="btn" style="background:var(--primary);color:#fff" type="submit">{% icon "search" %}</button>
           </div>
         </div>
         <div class="filter-card">

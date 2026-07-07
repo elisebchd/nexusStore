@@ -1,4 +1,4 @@
-{% load static store_tags %}
+{% load static store_tags icons %}
 <div class="product-card">
   <div class="product-card-badges">
     {% if product.is_deal_of_day %}<span class="badge-deal">DEAL</span>{% endif %}
@@ -7,7 +7,7 @@
   </div>
   {% if user.is_authenticated %}
   <button class="product-card-wishlist ajax-wishlist" data-product-id="{{ product.id }}" title="Save to wishlist">
-    <i class="bi bi-heart"></i>
+    {% icon "heart" %}
   </button>
   {% endif %}
   <a href="{{ product.get_absolute_url }}">
@@ -33,7 +33,7 @@
     <div class="product-card-rating">
       {% if product.review_count > 0 %}
         <span class="stars">
-          {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}
+          {% for i in "12345" %}{% if forloop.counter <= product.avg_rating %}{% icon "star-fill" %}{% else %}{% icon "star" %}{% endif %}{% endfor %}
         </span>
         <span class="rating-count">({{ product.review_count }})</span>
       {% else %}
@@ -52,7 +52,7 @@
       <form method="POST" action="{% url 'store:add_to_cart' product.id %}">
         {% csrf_token %}
         <button type="submit" class="btn-add-cart ajax-add-cart" data-product-id="{{ product.id }}" title="Add to cart">
-          <i class="bi bi-bag-plus"></i>
+          {% icon "bag-plus" %}
         </button>
       </form>
       {% else %}
